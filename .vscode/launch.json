@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "request": "launch",
+            "name": "Start Jupyter Lab",
+            "module": "jupyter",
+            "args": [
+                "lab",
+                "--ip=0.0.0.0",
+                "--port=8888",
+                "--no-browser",
+                "--allow-root",
+                "--PasswordIdentityProvider.hashed_password=''"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
