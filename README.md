@@ -1,6 +1,6 @@
-# Template for jupyter notebooks
+# OWL Client Relationship
 
-VS Code DevContainers for working with jupyter notebooks
+Exploring the use of OWL with EMMOntoPy to describe a client relationship
 
 ## 🚀 Features
 - Local or GitHub Codespaces support
