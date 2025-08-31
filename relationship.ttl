@@ -1,0 +1,69 @@
+@prefix : <http://example.org/owl-client-relationship#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Ontology Declaration
+<http://example.org/owl-client-relationship> a owl:Ontology ;
+    rdfs:label "Client Relationship Ontology" ;
+    rdfs:comment "An ontology for modeling relationships between consultants, client managers, clients, and organizations" .
+
+# Classes
+
+:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:comment "A human being - superclass of Consultant, ClientManager, etc." .
+
+:Consultant a owl:Class ;
+    rdfs:label "Consultant" ;
+    rdfs:comment "A person who provides consulting services" ;
+    rdfs:subClassOf :Person .
+
+:ClientManager a owl:Class ;
+    rdfs:label "Client Manager" ;
+    rdfs:comment "A person who manages client relationships" ;
+    rdfs:subClassOf :Person .
+
+:Client a owl:Class ;
+    rdfs:label "Client" ;
+    rdfs:comment "A client who receives services" .
+
+:Organization a owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:comment "An organization such as a company (e.g., Bitovi, M Corp)" .
+
+# Object Properties
+
+:hasRelationshipWith a owl:ObjectProperty ;
+    rdfs:label "has relationship with" ;
+    rdfs:comment "Generic fallback relation between persons" ;
+    rdfs:domain :Person ;
+    rdfs:range :Person .
+
+:reportsTo a owl:ObjectProperty ;
+    rdfs:label "reports to" ;
+    rdfs:comment "Indicates that a consultant reports to a client manager" ;
+    rdfs:domain :Consultant ;
+    rdfs:range :ClientManager ;
+    rdfs:subPropertyOf :hasRelationshipWith .
+
+:worksFor a owl:ObjectProperty ;
+    rdfs:label "works for" ;
+    rdfs:comment "Indicates that a person works for an organization" ;
+    rdfs:domain :Person ;
+    rdfs:range :Organization .
+
+:managesClient a owl:ObjectProperty ;
+    rdfs:label "manages client" ;
+    rdfs:comment "Indicates that a client manager manages a client" ;
+    rdfs:domain :ClientManager ;
+    rdfs:range :Client .
+
+# Example Individuals (optional - can be used for testing)
+
+:Bitovi a :Organization ;
+    rdfs:label "Bitovi" .
+
+:MCorp a :Organization ;
+    rdfs:label "M Corp" .

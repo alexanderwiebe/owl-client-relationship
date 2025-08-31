@@ -1,2 +1,8 @@
 ipykernel
 python-dotenv
+owlready2
+EMMOntoPy
+pydotplus
+ipycytoscape
+networkx
+graphviz

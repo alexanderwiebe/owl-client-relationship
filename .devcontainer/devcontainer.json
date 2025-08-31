@@ -1,5 +1,5 @@
 {
-  "name": "Base Notebook",
+  "name": "Owl Client Relationship Notebook",
   "build": {
     "dockerfile": "../Dockerfile"
   },
