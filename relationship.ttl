@@ -29,6 +29,11 @@
     rdfs:label "Client" ;
     rdfs:comment "A client who receives services" .
 
+:ConsultantManager a owl:Class ;
+    rdfs:label "Consultant Manager" ;
+    rdfs:comment "A person who manages consultants" ;
+    rdfs:subClassOf :Person .
+
 :Organization a owl:Class ;
     rdfs:label "Organization" ;
     rdfs:comment "An organization such as a company (e.g., Bitovi, M Corp)" .
@@ -43,9 +48,9 @@
 
 :reportsTo a owl:ObjectProperty ;
     rdfs:label "reports to" ;
-    rdfs:comment "Indicates that a consultant reports to a client manager" ;
-    rdfs:domain :Consultant ;
-    rdfs:range :ClientManager ;
+    rdfs:comment "Indicates reporting relationship between people" ;
+    rdfs:domain :Person ;
+    rdfs:range :Person ; 
     rdfs:subPropertyOf :hasRelationshipWith .
 
 :worksFor a owl:ObjectProperty ;
@@ -59,6 +64,18 @@
     rdfs:comment "Indicates that a client manager manages a client" ;
     rdfs:domain :ClientManager ;
     rdfs:range :Client .
+
+:hasConsultantManager a owl:ObjectProperty ;
+    rdfs:label "has consultant manager" ;
+    rdfs:domain :Consultant ;
+    rdfs:range :ConsultantManager ;
+    rdfs:subPropertyOf :reportsTo .
+
+:hasClientManager a owl:ObjectProperty ;
+    rdfs:label "has client manager" ;
+    rdfs:domain [ owl:unionOf ( :Consultant :ClientManager ) ] ;
+    rdfs:range :ClientManager ;
+    rdfs:subPropertyOf :reportsTo .
 
 # Example Individuals (optional - can be used for testing)
 
