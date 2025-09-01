@@ -2,7 +2,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Ontology Declaration
 <http://example.org/owl-client-relationship> a owl:Ontology ;
@@ -18,7 +17,13 @@
 :Consultant a owl:Class ;
     rdfs:label "Consultant" ;
     rdfs:comment "A person who provides consulting services" ;
-    rdfs:subClassOf :Person .
+    rdfs:subClassOf :Person ,
+        [ a owl:Restriction ;
+          owl:onProperty :hasConsultantManager ;
+          owl:someValuesFrom :ConsultantManager ] ,
+        [ a owl:Restriction ;
+          owl:onProperty :hasClientManager ;
+          owl:someValuesFrom :ClientManager ] .
 
 :ClientManager a owl:Class ;
     rdfs:label "Client Manager" ;
@@ -79,8 +84,8 @@
 
 # Example Individuals (optional - can be used for testing)
 
-:Bitovi a :Organization ;
+:Bitovi a owl:NamedIndividual, :Organization ;
     rdfs:label "Bitovi" .
 
-:MCorp a :Organization ;
+:MCorp a owl:NamedIndividual, :Organization ;
     rdfs:label "M Corp" .
