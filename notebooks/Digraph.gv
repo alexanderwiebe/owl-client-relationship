@@ -5,10 +5,10 @@ digraph {
 	"Client Manager" [label="Client Manager" URL="http://example.org/owl-client-relationship#ClientManager" fillcolor="#ffffcc" style=filled]
 	"Consultant Manager" [label="Consultant Manager" URL="http://example.org/owl-client-relationship#ConsultantManager" fillcolor="#ffffcc" style=filled]
 	"Client Manager" -> Person [label=isA arrowhead=empty]
-	Consultant -> Person [label=isA arrowhead=empty]
-	Consultant -> "Consultant Manager" [label="has consultant manager some"]
-	Consultant -> "Client Manager" [label="has client manager some"]
 	"Consultant Manager" -> Person [label=isA arrowhead=empty]
 	Thing [label=Thing URL="http://www.w3.org/2002/07/owl#Thing" color=red fillcolor="#ffffcc" style=filled]
 	Person -> Thing [label=isA arrowhead=empty]
+	Consultant -> Person [label=isA arrowhead=empty]
+	Consultant -> "Consultant Manager" [label="has consultant manager some"]
+	Consultant -> "Client Manager" [label="has client manager some"]
 }

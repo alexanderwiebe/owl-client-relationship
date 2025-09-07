@@ -28,7 +28,7 @@
 </g>
 </g>
 <!-- Consultant&#45;&gt;Person -->
-<g id="edge2" class="edge">
+<g id="edge4" class="edge">
 <title>Consultant&#45;&gt;Person</title>
 <path fill="none" stroke="black" d="M79.03,-31.62C53.07,-42 21.52,-59.55 5.93,-87 -1.98,-100.91 -1.98,-109.09 5.93,-123 21.01,-149.56 51.04,-166.85 76.5,-177.35"/>
 <polygon fill="none" stroke="black" points="75.4,-180.67 85.99,-181.04 77.94,-174.15 75.4,-180.67"/>
@@ -44,7 +44,7 @@
 </g>
 </g>
 <!-- Consultant&#45;&gt;Client Manager -->
-<g id="edge4" class="edge">
+<g id="edge6" class="edge">
 <title>Consultant&#45;&gt;Client Manager</title>
 <path fill="none" stroke="black" d="M119.93,-36.2C119.93,-47.84 119.93,-63.45 119.93,-76.76"/>
 <polygon fill="black" stroke="black" points="116.43,-76.82 119.93,-86.82 123.43,-76.82 116.43,-76.82"/>
@@ -60,7 +60,7 @@
 </g>
 </g>
 <!-- Consultant&#45;&gt;Consultant Manager -->
-<g id="edge3" class="edge">
+<g id="edge5" class="edge">
 <title>Consultant&#45;&gt;Consultant Manager</title>
 <path fill="none" stroke="black" d="M177.8,-24.54C223.51,-29.91 282.69,-39.42 301.93,-54 309.57,-59.79 315.04,-68.56 318.87,-77.15"/>
 <polygon fill="black" stroke="black" points="315.65,-78.54 322.53,-86.6 322.18,-76.01 315.65,-78.54"/>
@@ -76,7 +76,7 @@
 </g>
 </g>
 <!-- Person&#45;&gt;Thing -->
-<g id="edge6" class="edge">
+<g id="edge3" class="edge">
 <title>Person&#45;&gt;Thing</title>
 <path fill="none" stroke="black" d="M119.93,-210.2C119.93,-221.84 119.93,-237.45 119.93,-250.76"/>
 <polygon fill="none" stroke="black" points="116.43,-250.82 119.93,-260.82 123.43,-250.82 116.43,-250.82"/>
@@ -90,7 +90,7 @@
 <text text-anchor="middle" x="130.93" y="-144.8" font-family="Times,serif" font-size="14.00">isA</text>
 </g>
 <!-- Consultant Manager&#45;&gt;Person -->
-<g id="edge5" class="edge">
+<g id="edge2" class="edge">
 <title>Consultant Manager&#45;&gt;Person</title>
 <path fill="none" stroke="black" d="M288.48,-121.79C251.45,-136.99 195.74,-159.87 158.63,-175.11"/>
 <polygon fill="none" stroke="black" points="157.07,-171.96 149.15,-179 159.73,-178.44 157.07,-171.96"/>
