@@ -6,3 +6,4 @@ pydotplus
 ipycytoscape
 networkx
 graphviz
+openai
