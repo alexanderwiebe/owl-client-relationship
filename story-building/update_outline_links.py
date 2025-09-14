@@ -56,15 +56,18 @@ if not TOKEN:
     sys.exit(1)
 
 GQL_ENDPOINT = 'https://api.github.com/graphql'
-HEADERS = {"Authorization": f"bearer {TOKEN}", "Accept": "application/vnd.github+json"}
+HEADERS = {"Authorization": f"bearer {TOKEN}",
+           "Accept": "application/vnd.github+json"}
 
 
 def gql(query: str, variables: Dict[str, Any]) -> Dict[str, Any]:
-    resp = requests.post(GQL_ENDPOINT, json={'query': query, 'variables': variables}, headers=HEADERS, timeout=60)
+    resp = requests.post(GQL_ENDPOINT, json={
+                         'query': query, 'variables': variables}, headers=HEADERS, timeout=60)
     try:
         data = resp.json()
     except ValueError:
-        raise RuntimeError(f'Non-JSON response: {resp.status_code} {resp.text[:200]}')
+        raise RuntimeError(
+            f'Non-JSON response: {resp.status_code} {resp.text[:200]}')
     if 'errors' in data:
         raise RuntimeError(f'GraphQL errors: {data["errors"]}')
     return data
@@ -86,10 +89,12 @@ def fetch_project_issues() -> List[Dict[str, Any]]:
     cursor = None
     issues: List[Dict[str, Any]] = []
     while True:
-        data = gql(q, {'login': USERNAME, 'num': PROJECT_NUMBER, 'cursor': cursor})
+        data = gql(
+            q, {'login': USERNAME, 'num': PROJECT_NUMBER, 'cursor': cursor})
         proj = data['data']['user'].get('projectV2')
         if not proj:
-            raise RuntimeError(f'Project {PROJECT_NUMBER} not found for user {USERNAME}')
+            raise RuntimeError(
+                f'Project {PROJECT_NUMBER} not found for user {USERNAME}')
         items = proj['items']
         for node in items['nodes']:
             c = node.get('content')
@@ -116,9 +121,11 @@ def update_lines(lines: List[str], issues_by_title: Dict[str, Dict[str, Any]]) -
     updated: List[str] = []
     changed = 0
     # Pattern for first line of a two-line task node label capturing checkbox mark (space or x)
-    first_line_pat = re.compile(r'^(?P<prefix>\s*P\w+\["- \[)(?P<mark> |x)(?P<post>\] )(?!\[)(?P<rest>.+?)(?P<trail>\s{2})$')
+    first_line_pat = re.compile(
+        r'^(?P<prefix>\s*P\w+\["- \[)(?P<mark> |x)(?P<post>\] )(?!\[)(?P<rest>.+?)(?P<trail>\s{2})$')
     # Pattern to extract (after linking) node id, title, url for click directives
-    node_extract_pat = re.compile(r'^(?P<indent>\s*)(?P<node>P\w+)\["- \[[ x]\] \[(?P<title>[^\]]+)\]\((?P<url>https://github.com/[^\)]+/issues/(?P<num>\d+))\)')
+    node_extract_pat = re.compile(
+        r'^(?P<indent>\s*)(?P<node>P\w+)\["- \[[ x]\] \[(?P<title>[^\]]+)\]\((?P<url>https://github.com/[^\)]+/issues/(?P<num>\d+))\)')
     node_click_map: Dict[str, Dict[str, str]] = {}
     i = 0
     total = len(lines)
@@ -146,7 +153,8 @@ def update_lines(lines: List[str], issues_by_title: Dict[str, Dict[str, Any]]) -
                     issue = issues_by_title.get(plain_title)
                     if issue:
                         issue_url = issue['url']
-                        desired_mark = 'x' if (issue.get('state') == 'CLOSED') else mark
+                        desired_mark = 'x' if (
+                            issue.get('state') == 'CLOSED') else mark
                         # Build linked title if not already linked
                         if not (raw_title.startswith('[') and '](' in raw_title):
                             linked_title = f'[{plain_title}]({issue_url})'
@@ -223,7 +231,8 @@ def main():
         sys.exit(2)
     new_lines = update_lines(lines, issues_by_title)
     if DRY_RUN:
-        sys.stderr.write('DRY_RUN=1; not writing changes. Preview below (first 40 lines if long):\n')
+        sys.stderr.write(
+            'DRY_RUN=1; not writing changes. Preview below (first 40 lines if long):\n')
         preview = '\n'.join(new_lines[:40])
         print(preview)
         return

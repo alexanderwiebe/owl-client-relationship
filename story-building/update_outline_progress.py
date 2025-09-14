@@ -48,16 +48,19 @@ if not TOKEN:
     sys.stderr.write('ERROR: Missing GITHUB_TOKEN / GITHUB_TOKEN_FG\n')
     sys.exit(1)
 
-REST_HEADERS = {"Authorization": f"token {TOKEN}", "Accept": "application/vnd.github+json"}
+REST_HEADERS = {"Authorization": f"token {TOKEN}",
+                "Accept": "application/vnd.github+json"}
 
 
 def list_repo_issues() -> Dict[int, dict]:
     issues: Dict[int, dict] = {}
     page = 1
     while True:
-        r = requests.get(f'https://api.github.com/repos/{REPO_NAME}/issues', params={"state": "all", "per_page": 100, "page": page}, headers=REST_HEADERS, timeout=30)
+        r = requests.get(f'https://api.github.com/repos/{REPO_NAME}/issues', params={
+                         "state": "all", "per_page": 100, "page": page}, headers=REST_HEADERS, timeout=30)
         if r.status_code != 200:
-            raise RuntimeError(f'Issue list failed page {page}: {r.status_code} {r.text[:160]}')
+            raise RuntimeError(
+                f'Issue list failed page {page}: {r.status_code} {r.text[:160]}')
         batch = r.json()
         if not batch:
             break
@@ -69,7 +72,8 @@ def list_repo_issues() -> Dict[int, dict]:
     return issues
 
 
-PARENT_LINK_LINE = re.compile(r'^(?P<indent>\s*P\w+\["- \[)(?P<mark> |x)(?P<mid>\] )(?P<link>\[[^\]]+\]\(https://github.com/[^\)]+/issues/(?P<num>\d+)\))(?P<rest>.*)$')
+PARENT_LINK_LINE = re.compile(
+    r'^(?P<indent>\s*P\w+\["- \[)(?P<mark> |x)(?P<mid>\] )(?P<link>\[[^\]]+\]\(https://github.com/[^\)]+/issues/(?P<num>\d+)\))(?P<rest>.*)$')
 PROGRESS_ANNOTATION = re.compile(r'\s*\(\d+/\d+\s+•\s+\d+%\)')
 CHECKLIST_CHILD = re.compile(r'^- \[(?: |x|X)\] #(\d+)', re.MULTILINE)
 
