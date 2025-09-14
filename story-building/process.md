@@ -19,6 +19,7 @@ flowchart TD
   G --> H[Add Mermaid Click Links<br/>update_outline_links.py]
   F --> I[Progress Annotation<br/>update_outline_progress.py]
   F --> J[Notebook Link Backfill<br/>update_issue_notebook_links.py]
+  J --> N[Notebook Templating<br/>template_notebooks_from_issues.py]
     J --> K[Issues Reference Notebooks]
   H --> L[Interactive Diagram - click links]
     I --> M[Live % Completion in Diagram]
@@ -111,7 +112,17 @@ python story-building/update_issue_notebook_links.py
 ```
 Injects / extends a `### Notebook` section inside each issue.
 
-### 8. Iterate
+### 8. Template / Refresh Notebooks From Issues
+```
+# Dry-run create missing notebooks for all parents
+DRY_RUN=1 python story-building/template_notebooks_from_issues.py
+
+# Overwrite a specific notebook with fresh sub-issue sections & code placeholders
+OVERWRITE=1 ONLY_ISSUES=12 INCLUDE_CODE_PLACEHOLDERS=1 python story-building/template_notebooks_from_issues.py
+```
+Generates a standard notebook header (title, parent link, status) and one section per sub-issue.
+
+### 9. Iterate
 As sub-issues are completed, re-run:
 ```
 python story-building/update_outline_progress.py
