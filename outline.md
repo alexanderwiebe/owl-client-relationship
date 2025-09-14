@@ -4,41 +4,41 @@ flowchart TD
 
     subgraph P1["Phase 1 — Ontology foundation"]
         direction TB
-        P1A["- [ ] Ontology Loading & Inspection  
+        P1A["- [ ] [Ontology Loading & Inspection](https://github.com/alexanderwiebe/owl-client-relationship/issues/1) (0/6 • 0%)  
         [[notebooks/ontology_load_and_query.ipynb]]"]
-        P1B["- [ ] Ontology Manipulation  
+        P1B["- [ ] [Ontology Manipulation](https://github.com/alexanderwiebe/owl-client-relationship/issues/2) (0/5 • 0%)  
         [[notebooks/ontology_manipulation.ipynb]]"]
-        P1C["- [ ] Ontology Querying (NL → SPARQL)  
+        P1C["- [ ] [Ontology Querying (NL → SPARQL)](https://github.com/alexanderwiebe/owl-client-relationship/issues/3) (0/6 • 0%)  
         [[notebooks/nl_to_sparql.ipynb]]"]
-        P1D["- [ ] Event Logging & Rollback  
+        P1D["- [ ] [Event Logging & Rollback](https://github.com/alexanderwiebe/owl-client-relationship/issues/4) (0/5 • 0%)  
         [[notebooks/ontology_events_and_rollback.ipynb]]"]
     end
 
     subgraph P2["Phase 2 — MCP Layer"]
         direction TB
-        P2A["- [ ] Build MCP tool server  
+        P2A["- [ ] [Build MCP tool server](https://github.com/alexanderwiebe/owl-client-relationship/issues/5) (0/10 • 0%)  
         [[notebooks/mcp_tool_server_demo.ipynb]]"]
-        P2B["- [ ] Expose ontology functions  
+        P2B["- [ ] [Expose ontology functions](https://github.com/alexanderwiebe/owl-client-relationship/issues/6) (0/6 • 0%)  
         [[notebooks/mcp_tool_server_demo.ipynb]]"]
     end
 
     subgraph P3["Phase 3 — Telemetry & Observability"]
         direction TB
-        P3A["- [ ] Add OpenTelemetry tracing  
+        P3A["- [ ] [Add OpenTelemetry tracing](https://github.com/alexanderwiebe/owl-client-relationship/issues/7) (0/6 • 0%)  
         [[notebooks/telemetry_demo.ipynb]]"]
-        P3B["- [ ] Export traces to Jaeger/Tempo  
+        P3B["- [ ] [Export traces to Jaeger/Tempo](https://github.com/alexanderwiebe/owl-client-relationship/issues/8) (0/3 • 0%)  
         [[notebooks/telemetry_demo.ipynb]]"]
-        P3C["- [ ] Structured logging of ontology events  
+        P3C["- [ ] [Structured logging of ontology events](https://github.com/alexanderwiebe/owl-client-relationship/issues/9) (0/5 • 0%)  
         [[notebooks/telemetry_demo.ipynb]]"]
     end
 
     subgraph P4["Phase 4 — Workflow Orchestration (n8n)"]
         direction TB
-        P4A["- [ ] Prototype chaining MCP X → MCP Y  
+        P4A["- [ ] [Prototype chaining MCP X → MCP Y](https://github.com/alexanderwiebe/owl-client-relationship/issues/10) (0/6 • 0%)  
         [[notebooks/workflow_prototype.ipynb]]"]
-        P4B["- [ ] Add branching/error handling  
+        P4B["- [ ] [Add branching/error handling](https://github.com/alexanderwiebe/owl-client-relationship/issues/11) (0/3 • 0%)  
         [[notebooks/workflow_prototype.ipynb]]"]
-        P4C["- [ ] Integrate Slack/CRM as external nodes  
+        P4C["- [ ] [Integrate Slack/CRM as external nodes](https://github.com/alexanderwiebe/owl-client-relationship/issues/12) (0/10 • 0%)  
         [[notebooks/workflow_prototype.ipynb]]"]
     end
 
