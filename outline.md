@@ -55,4 +55,16 @@ flowchart TD
     %% Flow connections
     P1 --> P2 --> P3 --> P4 --> P5
 
+    click P1A "https://github.com/alexanderwiebe/owl-client-relationship/issues/1" "Ontology Loading & Inspection"
+    click P1B "https://github.com/alexanderwiebe/owl-client-relationship/issues/2" "Ontology Manipulation"
+    click P1C "https://github.com/alexanderwiebe/owl-client-relationship/issues/3" "Ontology Querying (NL → SPARQL)"
+    click P1D "https://github.com/alexanderwiebe/owl-client-relationship/issues/4" "Event Logging & Rollback"
+    click P2A "https://github.com/alexanderwiebe/owl-client-relationship/issues/5" "Build MCP tool server"
+    click P2B "https://github.com/alexanderwiebe/owl-client-relationship/issues/6" "Expose ontology functions"
+    click P3A "https://github.com/alexanderwiebe/owl-client-relationship/issues/7" "Add OpenTelemetry tracing"
+    click P3B "https://github.com/alexanderwiebe/owl-client-relationship/issues/8" "Export traces to Jaeger/Tempo"
+    click P3C "https://github.com/alexanderwiebe/owl-client-relationship/issues/9" "Structured logging of ontology events"
+    click P4A "https://github.com/alexanderwiebe/owl-client-relationship/issues/10" "Prototype chaining MCP X → MCP Y"
+    click P4B "https://github.com/alexanderwiebe/owl-client-relationship/issues/11" "Add branching/error handling"
+    click P4C "https://github.com/alexanderwiebe/owl-client-relationship/issues/12" "Integrate Slack/CRM as external nodes"
 ```

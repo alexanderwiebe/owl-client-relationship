@@ -117,6 +117,9 @@ def update_lines(lines: List[str], issues_by_title: Dict[str, Dict[str, Any]]) -
     changed = 0
     # Pattern for first line of a two-line task node label capturing checkbox mark (space or x)
     first_line_pat = re.compile(r'^(?P<prefix>\s*P\w+\["- \[)(?P<mark> |x)(?P<post>\] )(?!\[)(?P<rest>.+?)(?P<trail>\s{2})$')
+    # Pattern to extract (after linking) node id, title, url for click directives
+    node_extract_pat = re.compile(r'^(?P<indent>\s*)(?P<node>P\w+)\["- \[[ x]\] \[(?P<title>[^\]]+)\]\((?P<url>https://github.com/[^\)]+/issues/(?P<num>\d+))\)')
+    node_click_map: Dict[str, Dict[str, str]] = {}
     i = 0
     total = len(lines)
     while i < total:
@@ -153,10 +156,56 @@ def update_lines(lines: List[str], issues_by_title: Dict[str, Dict[str, Any]]) -
                         if new_line != line:
                             line = new_line
                             changed += 1
+            # Collect node info for click directives (after potential modification)
+            mex = node_extract_pat.match(line.rstrip('\n'))
+            if mex:
+                node_id = mex.group('node')
+                node_click_map[node_id] = {
+                    'title': mex.group('title'),
+                    'url': mex.group('url')
+                }
         updated.append(line)
         i += 1
     sys.stderr.write(f'Lines changed: {changed}\n')
+    # Inject / refresh mermaid click directives inside the mermaid block
+    try:
+        updated = inject_click_directives(updated, node_click_map)
+    except Exception as e:
+        sys.stderr.write(f'WARNING: failed to inject click directives: {e}\n')
     return updated
+
+
+def inject_click_directives(lines: List[str], node_click_map: Dict[str, Dict[str, str]]) -> List[str]:
+    if not node_click_map:
+        return lines
+    # Find mermaid code fence boundaries
+    start_idx = None
+    end_idx = None
+    for idx, ln in enumerate(lines):
+        if start_idx is None and ln.strip().startswith('```mermaid'):
+            start_idx = idx
+            continue
+        if start_idx is not None and ln.strip() == '```':
+            end_idx = idx
+            break
+    if start_idx is None or end_idx is None:
+        return lines  # no mermaid block
+    # Remove existing click lines in block
+    block = lines[start_idx+1:end_idx]
+    filtered_block = [b for b in block if not b.strip().startswith('click ')]
+    # Append new click directives just before the closing fence (after existing content)
+    click_lines = []
+    for node_id in sorted(node_click_map.keys()):
+        info = node_click_map[node_id]
+        title = info['title'].replace('"', "'")
+        url = info['url']
+        click_lines.append(f'    click {node_id} "{url}" "{title}"')
+    # Ensure a blank line before directives for readability
+    if filtered_block and filtered_block[-1].strip() != '':
+        filtered_block.append('')
+    filtered_block.extend(click_lines)
+    new_lines = lines[:start_idx+1] + filtered_block + lines[end_idx:]
+    return new_lines
 
 
 def main():
